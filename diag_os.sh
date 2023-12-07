@@ -1,7 +1,7 @@
 #!/bin/bash
-mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/diag_os.$(date '+%Y%m%d_%H%M')
-export HOSTFILE=/home/gpadmin/gpconfigs/hostfile_all
+#mkdir -p /home/gpadmin/diag/diaglog
+export LOGFILE=/home/gpadmin/diag/diaglog/diag_os.$(date '+%Y%m%d_%H%M')
+export HOSTFILE=/home/gpadmin/diag/hostfile_all
 
 OSVER=`cat /etc/redhat-release | awk '{print $4}' | awk -F'.' '{print $1'}`
 
