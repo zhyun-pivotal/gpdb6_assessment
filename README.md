@@ -12,5 +12,5 @@ $ mv gpdb6_assessment-main diag
 
 (5) run diag shell script
 $ cd /home/gpadmin/diag
-$ sh run_diag.sh
+$ sh 0_run_diag.sh
 
