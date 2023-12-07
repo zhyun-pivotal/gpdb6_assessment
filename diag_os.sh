@@ -117,10 +117,10 @@ gpssh -f ${HOSTFILE} 'sudo /sbin/blockdev --getra /dev/sd*' >> ${LOGFILE}
 echo "" >> ${LOGFILE}
 #gpssh -f ${HOSTFILE} 'sudo /sbin/blockdev --getra /dev/mapper/vg*' >> ${LOGFILE}
 while read MDWMAPPER; do
-  gpssh -f ${HOSTFILEMDW} sudo /sbin/blockdev --getra ${MDWMAPPER}
+  gpssh -f ${HOSTFILEMDW} sudo /sbin/blockdev --getra ${MDWMAPPER} >> ${LOGFILE}
 done < /home/gpadmin/diag/mdw_mapper.list
 while read SEGMAPPER; do
-  gpssh -f ${HOSTFILESEG} sudo /sbin/blockdev --getra ${SEGMAPPER}
+  gpssh -f ${HOSTFILESEG} sudo /sbin/blockdev --getra ${SEGMAPPER} >> ${LOGFILE}
 done < /home/gpadmin/diag/seg_mapper.list
 
 echo "" >> ${LOGFILE}
