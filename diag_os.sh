@@ -11,8 +11,8 @@ OSVER=`cat /etc/redhat-release | awk '{print $4}' | awk -F'.' '{print $1'}`
 MDWNM=`head -n 1 /home/gpadmin/diag/hostfile_master`
 SEGNM=`head -n 1 /home/gpadmin/diag/hostfile_seg`
 
-gpssh -h $MDWNM 'df -h | grep mapper' > /home/gpadmin/diag/mdw_mapper.list
-gpssh -h $SEGNM 'df -h | grep mapper' > /home/gpadmin/diag/seg_mapper.list
+gpssh -h $MDWNM df -h | grep mapper | awk '{print $2}' > /home/gpadmin/diag/mdw_mapper.list
+gpssh -h $SEGNM df -h | grep mapper | awk '{print $2}' > /home/gpadmin/diag/seg_mapper.list
 
 echo "" > ${LOGFILE}
 echo "####################" >> ${LOGFILE}
