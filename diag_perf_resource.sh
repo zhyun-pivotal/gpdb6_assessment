@@ -138,7 +138,7 @@ FROM gpmetrics.gpcc_resgroup_history
 WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
 and segid != '-1'
 GROUP BY 1,2
-ORDER BY 1,2) TO '/home/gpadmin/diag/rsg_seg_1M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
+ORDER BY 1,2) TO '/home/gpadmin/diag/csv/rsg_seg_1M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
@@ -158,7 +158,7 @@ FROM gpmetrics.gpcc_resgroup_history
 WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
 and segid != '-1'
 GROUP BY 1,2
-ORDER BY 1,2) TO '/home/gpadmin/diag/rsg_seg_10M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
+ORDER BY 1,2) TO '/home/gpadmin/diag/csv/rsg_seg_10M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
