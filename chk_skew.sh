@@ -1,5 +1,6 @@
 #!/bin/bash
 #mkdir -p /home/gpadmin/diag/diaglog
+source /usr/local/greenplum-db/greenplum_path.sh
 export LOGFILE=/home/gpadmin/diag/diaglog/chk_skew.$(date '+%Y%m%d_%H%M')
 
 psql -f /home/gpadmin/dba/f_crt_view_chk_file_skew.sql
