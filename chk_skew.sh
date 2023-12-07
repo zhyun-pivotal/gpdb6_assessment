@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/chk_skew.$(date '+%Y%m%d_%H%M')
+export LOGFILE=/home/gpadmin/diag/diaglog/chk_skew.$(date '+%Y%m%d_%H%M')
 
 psql -f /home/gpadmin/dba/f_crt_view_chk_file_skew.sql
 
