@@ -14,7 +14,7 @@ SELECT schema_name
 	 , round(avg_size/1024/1024,1) avg_mb
 	 , round(max_size/1024/1024,1) max_mb
 	 , round(total_size/1024/1024,1) tot_mb
-FROM dba.v_chk_file_skew
+FROM public.v_chk_file_skew
 where 1=1 
 and   schema_name not in ('pg_catalog', 'information_schema')
 and   skew_percentage > 130
