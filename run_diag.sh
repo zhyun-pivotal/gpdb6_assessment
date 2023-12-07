@@ -16,19 +16,19 @@ psql -Atc "select distinct(hostname) from gp_segment_configuration order by host
 echo "##############################"
 echo "# 3. Parameter assessment"
 echo "##############################"
-sudo sh /home/gpadmin/diag/diag_os.sh
-sh /home/gpadmin/diag/diag_gpdb.sh
+sudo sh /home/gpadmin/diag/1_diag_os.sh
+sh /home/gpadmin/diag/2_diag_gpdb.sh
 
 echo "##############################"
 echo "# 4. DB upgrade assessment"
 echo "##############################"
-sh /home/gpadmin/diag/diag_gpupgrade.sh
+sh /home/gpadmin/diag/3_diag_gpupgrade.sh
 
 echo "##############################"
 echo "# 5. System resource utilization assessment"
 echo "##############################"
-sh /home/gpadmin/diag/chk_bloat_catalog.sh
-sh /home/gpadmin/diag/chk_bloat_tables.sh
-sh /home/gpadmin/diag/chk_skew.sh
-sh /home/gpadmin/diag/diag_perf_dbstatus.sh
-sh /home/gpadmin/diag/diag_perf_resource.sh
+sh /home/gpadmin/diag/4_chk_bloat_catalog.sh
+sh /home/gpadmin/diag/5_chk_bloat_tables.sh
+sh /home/gpadmin/diag/6_chk_skew.sh
+sh /home/gpadmin/diag/7_diag_perf_dbstatus.sh
+sh /home/gpadmin/diag/8_diag_perf_resource.sh
