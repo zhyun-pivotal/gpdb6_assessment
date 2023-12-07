@@ -9,9 +9,9 @@ mkdir -p /home/gpadmin/diag/csv
 ##############################
 # 2. Prepare hostfile
 ##############################
-psql -Atc "select distinct(hostname) from gp_segment_configuration where content = -1 order by hostname;" >> /home/gpadmin/diag/hostfile_master
-psql -Atc "select distinct(hostname) from gp_segment_configuration where content != -1 order by hostname;" >> /home/gpadmin/diag/hostfile_seg
-psql -Atc "select distinct(hostname) from gp_segment_configuration order by hostname;" >> /home/gpadmin/diag/hostfile_all
+psql -Atc "select distinct(hostname) from gp_segment_configuration where content = -1 order by hostname;" > /home/gpadmin/diag/hostfile_master
+psql -Atc "select distinct(hostname) from gp_segment_configuration where content != -1 order by hostname;" > /home/gpadmin/diag/hostfile_seg
+psql -Atc "select distinct(hostname) from gp_segment_configuration order by hostname;" > /home/gpadmin/diag/hostfile_all
 
 ##############################
 # 3. Parameter assessment
