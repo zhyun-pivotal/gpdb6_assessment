@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir -p /home/gpadmin/dba/diaglog
+export LOGFILE=/home/gpadmin/dba/diaglog/chk_skew.$(date '+%Y%m%d_%H%M')
 
 psql -c "
 -- please run psql -f f_crt_view_chk_file_skew.sql before this query 
@@ -15,4 +17,4 @@ and   schema_name not in ('pg_catalog', 'information_schema')
 and   skew_percentage > 130
 --and   total_size/1024/1024 > 1
 order by 3 desc, 1, 2
-;"
+;" >> ${LOGFILE}
