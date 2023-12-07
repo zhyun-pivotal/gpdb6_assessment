@@ -107,7 +107,7 @@ echo "####################" >> ${LOGFILE}
 ### pre-check the /data filesystem device by df -h command
 gpssh -f ${HOSTFILE} 'sudo /sbin/blockdev --getra /dev/sd*' >> ${LOGFILE}
 echo "" >> ${LOGFILE}
-gpssh -f ${HOSTFILE} 'sudo /sbin/blockdev --getra /dev/mapper/*' >> ${LOGFILE}
+gpssh -f ${HOSTFILE} 'sudo /sbin/blockdev --getra /dev/mapper/vg*' >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
