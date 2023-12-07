@@ -2,6 +2,8 @@
 mkdir -p /home/gpadmin/dba/diaglog
 export LOGFILE=/home/gpadmin/dba/diaglog/chk_skew.$(date '+%Y%m%d_%H%M')
 
+psql -f /home/gpadmin/dba/f_crt_view_chk_file_skew.sql
+
 psql -c "
 -- please run psql -f f_crt_view_chk_file_skew.sql before this query 
 SELECT schema_name
