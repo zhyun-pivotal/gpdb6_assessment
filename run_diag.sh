@@ -16,7 +16,7 @@ psql -Atc "select distinct(hostname) from gp_segment_configuration order by host
 ##############################
 # 3. Parameter assessment
 ##############################
-sh /home/gpadmin/diag/diag_os.sh
+sudo sh /home/gpadmin/diag/diag_os.sh
 sh /home/gpadmin/diag/diag_gpdb.sh
 
 ##############################
