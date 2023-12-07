@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/chkconf_gpdb.$(date '+%Y%m%d_%H%M')
+export LOGFILE=/home/gpadmin/dba/diaglog/diag_gpupgrade.$(date '+%Y%m%d_%H%M')
 export HOSTFILE=/home/gpadmin/gpconfigs/hostfile_all
 
 GPMAJOR=`gpstate --version | awk '{print $3}' | awk -F'.' '{print $1}'`
