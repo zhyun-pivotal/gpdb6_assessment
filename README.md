@@ -6,7 +6,7 @@
 
 (3) unzip upload file 
 $ unzip gpdb6_assessment-main.zip
-
+.
 (4) directory rename
 $ mv gpdb6_assessment-main diag
 
