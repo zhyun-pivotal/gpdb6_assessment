@@ -1,7 +1,7 @@
 #!/bin/bash
-mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/diag_gpupgrade.$(date '+%Y%m%d_%H%M')
-export HOSTFILE=/home/gpadmin/gpconfigs/hostfile_all
+#mkdir -p /home/gpadmin/diag/diaglog
+export LOGFILE=/home/gpadmin/diag/diaglog/diag_gpupgrade.$(date '+%Y%m%d_%H%M')
+export HOSTFILE=/home/gpadmin/diag/hostfile_all
 
 GPMAJOR=`gpstate --version | awk '{print $3}' | awk -F'.' '{print $1}'`
 GPMINOR=`gpstate --version | awk '{print $3}' | awk -F'.' '{print $2}'`
