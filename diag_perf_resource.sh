@@ -1,5 +1,6 @@
 #!/bin/bash
 #mkdir -p /home/gpadmin/diag/diaglog
+source /usr/local/greenplum-db/greenplum_path.sh
 export LOGFILE=/home/gpadmin/diag/diaglog/diag_perf_resource.$(date '+%Y%m%d_%H%M')
 export MDWNM=`sed -n '1p' /home/gpadmin/diag/hostfile_master`
 export SMDWNM=`sed -n '2p' /home/gpadmin/diag/hostfile_master`
