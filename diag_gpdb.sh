@@ -1,7 +1,7 @@
 #!/bin/bash
-mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/diag_gpdb.$(date '+%Y%m%d_%H%M')
-export HOSTFILESEG=/home/gpadmin/gpconfigs/hostfile_seg
+#mkdir -p /home/gpadmin/diag/diaglog
+export LOGFILE=/home/gpadmin/diag/diaglog/diag_gpdb.$(date '+%Y%m%d_%H%M')
+export HOSTFILESEG=/home/gpadmin/diag/hostfile_seg
 
 echo "" > ${LOGFILE}
 echo "####################" >> ${LOGFILE}
