@@ -124,8 +124,8 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 17. Resource Group Usages each 1 Minute to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -d gpperfmon -c "COPY(
-SELECT to_timestamp(floor((extract('epoch' from ctime) / 60 )) * 60) AT TIME ZONE 'Asia/Seoul' as interval_alias,
+psql -d gpperfmon -c "
+COPY(SELECT to_timestamp(floor((extract('epoch' from ctime) / 60 )) * 60) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 rsgname,
 avg(cpu_usage_percent) AS cpu_avg_per,
 max(cpu_usage_percent) AS cpu_max_per,
@@ -138,13 +138,14 @@ FROM gpmetrics.gpcc_resgroup_history
 WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
 and segid != '-1'
 GROUP BY 1,2
-ORDER BY 1,2 ) TO '/home/gpadmin/diag/rsg_seg_1M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
+ORDER BY 1,2) TO '/home/gpadmin/diag/rsg_seg_1M.csv' WITH CSV HEADER ;" >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 18. Resource Group Usages each 10 Minute to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -d gpperfmon -c "SELECT to_timestamp(floor((extract('epoch' from ctime) / 600 )) * 600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
+psql -d gpperfmon -c "
+COPY(SELECT to_timestamp(floor((extract('epoch' from ctime) / 600 )) * 600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 rsgname,
 avg(cpu_usage_percent) AS cpu_avg_per,
 max(cpu_usage_percent) AS cpu_max_per,
