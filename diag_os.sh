@@ -131,14 +131,11 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 13. NTP" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-#if [ ${OSVER} -eq 8 ]
-#then
-#  gpssh -f ${HOSTFILE} 'sudo systemctl status chronyd' >> ${LOGFILE}
-#else
-#  gpssh -f ${HOSTFILE} 'sudo systemctl status ntpd' >> ${LOGFILE}
-#fi
-gpssh -f ${HOSTFILE} 'sudo systemctl status chronyd' >> ${LOGFILE}
+if [ ${OSVER} -eq 8 ]
+then
+  gpssh -f ${HOSTFILE} 'systemctl status chronyd' >> ${LOGFILE}
+else
+  gpssh -f ${HOSTFILE} 'systemctl status ntpd' >> ${LOGFILE}
+fi
 echo "" >> ${LOGFILE}
-gpssh -f ${HOSTFILE} 'sudo systemctl status ntpd' >> ${LOGFILE}
-echo "" >> ${LOGFILE}
-gpssh -f ${HOSTFILE} 'sudo date' >> ${LOGFILE}
+gpssh -f ${HOSTFILE} 'date' >> ${LOGFILE}
