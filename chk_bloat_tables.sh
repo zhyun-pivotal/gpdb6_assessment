@@ -18,7 +18,7 @@ from (
     join pg_namespace as n
     on c.relnamespace=n.oid
     where b.btdrelpages > 1
-    and n.nspname not in (‘pg_catalog’, 'gp_toolkit', 'information_schema') ) as a
+    and n.nspname not in ('pg_catalog', 'gp_toolkit', 'information_schema') ) as a
 --where actual_size_mb > 1
 --and actual_size_mb / expected_size_mb > 1
 order by 1,2 desc ;" >> ${LOGFILE}
