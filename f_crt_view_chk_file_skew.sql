@@ -2,10 +2,10 @@
 View table SKEW using file size
 ******************************************************************/
 
-CREATE OR REPLACE FUNCTION dba.f_crt_view_chk_file_skew() RETURNS text AS
+CREATE OR REPLACE FUNCTION public.f_crt_view_chk_file_skew() RETURNS text AS
 $$
 DECLARE
-        v_function_name text := 'dba.f_crt_view_chk_file_skew';
+        v_function_name text := 'public.f_crt_view_chk_file_skew';
         v_location int;
         v_sql text;
         v_db_oid text;
@@ -18,15 +18,15 @@ BEGIN
         WHERE datname = current_database();
 
         v_location := 2000;
-        v_sql := 'DROP VIEW IF EXISTS dba.v_chk_file_skew';
+        v_sql := 'DROP VIEW IF EXISTS public.v_chk_file_skew';
         EXECUTE v_sql;
 
         v_location := 2200;
-        v_sql := 'DROP EXTERNAL TABLE IF EXISTS dba.ext_db_files';
+        v_sql := 'DROP EXTERNAL TABLE IF EXISTS public.ext_db_files';
         EXECUTE v_sql;
 
         v_location := 3000;
-        v_sql := 'CREATE EXTERNAL WEB TABLE dba.ext_db_files ' ||
+        v_sql := 'CREATE EXTERNAL WEB TABLE public.ext_db_files ' ||
                 '(segment_id int, relfilenode text, filename text, ' ||
                 'size numeric) ' ||
                 'execute E''ls -l $GP_SEG_DATADIR/base/' || v_db_oid ||
@@ -47,11 +47,11 @@ BEGIN
         v_skew_amount := 1.0*(1/v_num_segments);
 
         v_location := 4110;
-        v_sql := 'DROP VIEW IF EXISTS dba.v_chk_file_skew';
+        v_sql := 'DROP VIEW IF EXISTS public.v_chk_file_skew';
         EXECUTE v_sql;
 
         v_location := 4200;
-        v_sql := 'CREATE OR REPLACE VIEW dba.v_chk_file_skew AS ' ||
+        v_sql := 'CREATE OR REPLACE VIEW public.v_chk_file_skew AS ' ||
                  'SELECT schema_name, ' ||
                  '       table_name, ' ||
                  '       round(max(size)/avg(size)) * 100 as skew_percentage, ' ||
@@ -63,7 +63,7 @@ BEGIN
                  '      SELECT n.nspname AS schema_name, ' ||
                  '             c.relname AS table_name, ' ||
                  '             sum(db.size) as size ' ||
-                 '      FROM dba.ext_db_files db ' ||
+                 '      FROM public.ext_db_files db ' ||
                  '      JOIN pg_class c ON  split_part(db.relfilenode, ''.'', 1) = c.relfilenode::text ' ||
                  '      JOIN pg_namespace n ON c.relnamespace = n.oid ' ||
                  '      WHERE c.relkind = ''r'' ' ||
@@ -73,15 +73,15 @@ BEGIN
                  'HAVING sum(size) > 0  ' ||
                  'ORDER BY  skew_percentage DESC, schema_name, table_name';
         EXECUTE v_sql;
-        return  'Successfully created dba.v_chk_file_skew!!!';
+        return  'Successfully created public.v_chk_file_skew!!!';
 
 EXCEPTION
         WHEN OTHERS THEN
                 RAISE EXCEPTION '(%:%:%)', v_function_name, v_location, sqlerrm;
-                        return  'An error occurred while creating dba.v_chk_file_skew!!!';
+                        return  'An error occurred while creating public.v_chk_file_skew!!!';
 
 END;
 $$
 language plpgsql;
 
-SELECT dba.f_crt_view_chk_file_skew();
+SELECT public.f_crt_view_chk_file_skew();
