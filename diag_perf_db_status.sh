@@ -49,3 +49,34 @@ psql -c "select schemaname ,round(sum(pg_total_relation_size(schemaname||'.'||ta
 #echo "### 7. Partitioned table List " >> ${LOGFILE}
 #echo "####################" >> ${LOGFILE}
 #psql -c "select schemaname,tablename,partitiontype,count(partitiontablename) as total_no_of_partitions from pg_partitions group by tablename, schemaname,partitiontype ORDER BY 1,2;" >> ${LOGFILE}
+
+echo "" >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+echo "### 8. DISK USAGE Percents by One Hour" >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+psql -d gpperfmon -c "
+SELECT to_timestamp(floor((extract('epoch' from ctime) / 3600 )) * 3600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
+hostname,
+filesystem,
+round (MIN(bytes_used) / AVG(total_bytes) * 100 ,2) AS min_disk_usage_per,
+round (AVG(bytes_used) / AVG(total_bytes) * 100 ,2) AS avg_disk_usage_per,
+round (MAX(bytes_used) / AVG(total_bytes) * 100 ,2)  AS max_disk_usage_per
+FROM  gpmetrics.gpcc_disk_history
+GROUP BY interval_alias, hostname, filesystem
+ORDER BY 1,2,3;" >> ${LOGFILE}
+
+echo "" >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+echo "### 9. Frequency SQL (Top 50)  " >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+psql -d gpperfmon -c "SELECT query_text,count(*) FROM gpmetrics.gpcc_queries_history WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
+  AND ctime < CURRENT_DATE GROUP BY query_text ORDER BY 2 DESC LIMIT 50;" >> ${LOGFILE}
+
+echo "" >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+echo "### 10. Running Timed SQL (Top 100)  " >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+psql -d gpperfmon -c "SELECT db,username,query_text,avg (tfinish-tstart),max (tfinish-tstart) FROM gpmetrics.gpcc_queries_history
+WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
+and db not in('gpperfmon','template1')
+GROUP BY db,username,query_text ORDER BY 4 DESC LIMIT 100;" >> ${LOGFILE}
