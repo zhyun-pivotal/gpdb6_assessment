@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p /home/gpadmin/diag/diaglog
+#mkdir -p /home/gpadmin/diag/diaglog
 export LOGFILE=/home/gpadmin/diag/diaglog/chk_bloat_catalog.$(date '+%Y%m%d_%H%M')
 
 psql -c "
