@@ -1,6 +1,6 @@
 #!/bin/bash
 #mkdir -p /home/gpadmin/diag/diaglog
-export LOGFILE=/home/gpadmin/diag/diaglog/diag_perf_db_status.$(date '+%Y%m%d_%H%M')
+export LOGFILE=/home/gpadmin/diag/diaglog/diag_perf_dbstatus.$(date '+%Y%m%d_%H%M')
 
 echo "" > ${LOGFILE}
 echo "####################" >> ${LOGFILE}
