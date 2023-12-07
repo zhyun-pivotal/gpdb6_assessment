@@ -17,7 +17,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 2. GPCC version" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-gpcc --version >> ${LOGFILE}
+/usr/local/greenplum-cc/bin/gpcc --version >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
