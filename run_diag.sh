@@ -28,7 +28,7 @@ sh /home/gpadmin/diag/diag_gpupgrade.sh
 # 5. System resource utilization assessment
 ##############################
 sh /home/gpadmin/diag/chk_bloat_catalog.sh
-sh /home/gpadmin/diag/chk_bloat_table.sh
+sh /home/gpadmin/diag/chk_bloat_tables.sh
 sh /home/gpadmin/diag/chk_skew.sh
 sh /home/gpadmin/diag/diag_perf_dbstatus.sh
 sh /home/gpadmin/diag/diag_perf_resource.sh
