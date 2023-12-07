@@ -29,3 +29,23 @@ psql -c "select schemaname ,round(sum(pg_total_relation_size(schemaname||'.'||ta
 #psql -d gpperfmon -c "SELECT SCHEMA,table_name,relkind,relstorage,SIZE/1024/1024 AS size_mb FROM gpmetrics.gpcc_size_ext_table
 #WHERE SCHEMA NOT in('gp_toolkit','pg_catalog','gpmetrics','dba','information_schema','gpcc_schema','gpexpand')
 #ORDER BY 1,2,3,4,5 DESC;" >> ${LOGFILE}
+
+#echo "" >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#echo "### 5. BUSY TABLE LIST " >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#psql -d gpperfmon -c "SELECT SCHEMA,table_name,relkind,relstorage,SIZE/1024/1024 AS size_mb FROM gpmetrics.gpcc_size_ext_table
+#WHERE SCHEMA NOT in('gp_toolkit','pg_catalog','gpmetrics','dba','information_schema','gpcc_schema','gpexpand')
+#ORDER BY 1,2,3,4,5 DESC;" >> ${LOGFILE}
+
+#echo "" >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#echo "### 6. ERROR MESSAGES " >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#psql -d gpperfmon -c "SSELECT logmessage, count(*) FROM gpmetrics.gpcc_pg_log_history GROUP BY 1 ORDER BY 2 DESC LIMIT 30;" >> ${LOGFILE}
+
+#echo "" >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#echo "### 7. Partitioned table List " >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#psql -c "select schemaname,tablename,partitiontype,count(partitiontablename) as total_no_of_partitions from pg_partitions group by tablename, schemaname,partitiontype ORDER BY 1,2;" >> ${LOGFILE}
