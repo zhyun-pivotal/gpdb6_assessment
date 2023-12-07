@@ -6,7 +6,7 @@ echo "" > ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 11. System Resource Usages Raw data to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(
+psql -d gpperfmon -c "COPY(
 SELECT *
 FROM gpmetrics.gpcc_system_history
 where ctime >= CURRENT_DATE - INTERVAL '7 days'
@@ -16,7 +16,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 12. System Resource Usages each 1 Minute to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(
+psql -d gpperfmon -c "COPY(
 SELECT to_timestamp(floor((extract('epoch' from ctime) / 60 )) * 60) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 -- hostname,
 round(avg(cpu_user)) AS max_cpu_user,
@@ -47,7 +47,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 13. System Resource Usages each 10 Minutes to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(
+psql -d gpperfmon -c "COPY(
 SELECT to_timestamp(floor((extract('epoch' from ctime) / 600 )) * 600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 -- hostname,
 round(avg(cpu_user)) AS max_cpu_user,
@@ -78,7 +78,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 14. System Resource Usages each 1 Hour to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(
+psql -d gpperfmon -c "COPY(
 SELECT to_timestamp(floor((extract('epoch' from ctime) / 3600 )) * 3600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 -- hostname,
 round(avg(cpu_user)) AS max_cpu_user,
@@ -115,7 +115,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 16. Resource Group Usages Raw data to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(SELECT *
+psql -d gpperfmon -c "COPY(SELECT *
 FROM gpmetrics.gpcc_resgroup_history
 WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
 ORDER BY 1,2) TO '/home/gpadmin/diag/csv/rsg_all_15s.csv' WITH CSV HEADER ;" >> ${LOGFILE}
@@ -124,7 +124,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 17. Resource Group Usages each 1 Minute to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "COPY(
+psql -d gpperfmon -c "COPY(
 SELECT to_timestamp(floor((extract('epoch' from ctime) / 60 )) * 60) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 rsgname,
 avg(cpu_usage_percent) AS cpu_avg_per,
@@ -144,7 +144,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 18. Resource Group Usages each 10 Minute to CSV file" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "SELECT to_timestamp(floor((extract('epoch' from ctime) / 600 )) * 600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
+psql -d gpperfmon -c "SELECT to_timestamp(floor((extract('epoch' from ctime) / 600 )) * 600) AT TIME ZONE 'Asia/Seoul' as interval_alias,
 rsgname,
 avg(cpu_usage_percent) AS cpu_avg_per,
 max(cpu_usage_percent) AS cpu_max_per,
@@ -163,7 +163,7 @@ echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
 echo "### 19. Need for Table Analyze " >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
-psql -c "SELECT relname from pg_class where reltuples=0 and relpages=0 and relkind='r' and relname not like 't%' and relname not like 'err%';" >> ${LOGFILE}
+psql -c "SELECT relname FROM pg_class where reltuples=0 and relpages=0 and relkind='r' and relname not like 't%' and relname not like 'err%';" >> ${LOGFILE}
 
 echo "" >> ${LOGFILE}
 echo "####################" >> ${LOGFILE}
