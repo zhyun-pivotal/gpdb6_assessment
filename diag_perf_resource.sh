@@ -1,3 +1,6 @@
+#!/bin/bash
+#mkdir -p /home/gpadmin/diag/diaglog
+export LOGFILE=/home/gpadmin/diag/diaglog/diag_perf_resource.$(date '+%Y%m%d_%H%M')
 
 echo "" > ${LOGFILE}
 echo "####################" >> ${LOGFILE}
