@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir -p /home/gpadmin/dba/diaglog
-export LOGFILE=/home/gpadmin/dba/diaglog/chk_bloat_tables.$(date '+%Y%m%d_%H%M')
+mkdir -p /home/gpadmin/diag/diaglog
+export LOGFILE=/home/gpadmin/diag/diaglog/chk_bloat_tables.$(date '+%Y%m%d_%H%M')
 
 psql -c "
 SELECT a.*
