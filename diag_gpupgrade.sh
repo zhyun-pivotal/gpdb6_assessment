@@ -1,5 +1,6 @@
 #!/bin/bash
 #mkdir -p /home/gpadmin/diag/diaglog
+source /usr/local/greenplum-db/greenplum_path.sh
 export LOGFILE=/home/gpadmin/diag/diaglog/diag_gpupgrade.$(date '+%Y%m%d_%H%M')
 export HOSTFILE=/home/gpadmin/diag/hostfile_all
 
