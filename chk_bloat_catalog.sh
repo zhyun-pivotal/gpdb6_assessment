@@ -1,3 +1,8 @@
+#!/bin/bash
+mkdir -p /home/gpadmin/dba/diaglog
+export LOGFILE=/home/gpadmin/dba/diaglog/chk_bloat_catalog.$(date '+%Y%m%d_%H%M')
+
+psql -c "
 SELECT a.*
 FROM (
     SELECT n.nspname as schemaname,
@@ -14,4 +19,4 @@ FROM (
 WHERE 1=1
 -- AND actual_size_mb > 1
 -- AND actual_size_mb / expected_size_mb > 1
-ORDER BY 1,2 desc;
+ORDER BY 1,2 desc;"
