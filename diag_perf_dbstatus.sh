@@ -80,3 +80,15 @@ psql -d gpperfmon -c "SELECT db,username,query_text,avg (tfinish-tstart),max (tf
 WHERE ctime >= CURRENT_DATE - INTERVAL '7 days'
 and db not in('gpperfmon','template1')
 GROUP BY db,username,query_text ORDER BY 4 DESC LIMIT 100;" >> ${LOGFILE}
+
+echo "" >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+echo "### 11. Need for Table Analyze " >> ${LOGFILE}
+echo "####################" >> ${LOGFILE}
+psql -c "SELECT relname FROM pg_class where reltuples=0 and relpages=0 and relkind='r' and relname not like 't%' and relname not like 'err%';" >> ${LOGFILE}
+
+#echo "" >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#echo "### 12. Replicated Mirror Segments status " >> ${LOGFILE}
+#echo "####################" >> ${LOGFILE}
+#psql -c "SELECT gp_segment_id,client_addr,client_port,backend_start,state,sync_state,sync_error FROM pg_catalog.gp_stat_replication ORDER BY 1;" >> ${LOGFILE}
