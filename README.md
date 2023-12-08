@@ -26,6 +26,10 @@ $ sh 0_run_diag.sh
 
 (refernece url : https://docs.vmware.com/en/VMware-Greenplum/6/greenplum-database/install_guide-prep_os.html#topic23)
 
+(2) A version of gpcc 6.x or higher must be installed.
+
+If the gpcc is not installed or in a non-operating state, some of the report resolutions are not generated.
+
 ------------------------------------------------------------------
 
 # ユーザーガイド
