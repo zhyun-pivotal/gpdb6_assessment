@@ -28,7 +28,7 @@ $ sh 0_run_diag.sh
 
 (2) A version of gpcc 6.x or higher must be installed.
 
-If the gpcc is not installed or in a non-operating state, some of the report resolutions are not generated.
+If the gpcc is not installed or in a non-operating state, some of the report result are not generated.
 
 ------------------------------------------------------------------
 
